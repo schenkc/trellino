@@ -18,7 +18,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
+  def show
+    @user = current_user
+
+    render :show
   end
 
   private

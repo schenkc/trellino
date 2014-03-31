@@ -1,0 +1,23 @@
+<h1>Hi, <%= current_user.email %>!</h1>
+
+<h3>Circle Stuff</h3>
+<br>
+<h4>Circles you own:</h4>
+<ul>
+  <% current_user.owned_circles.each do |circle| %>
+    <li>
+      <%= circle.name %>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Circles you are a member of:</h4>
+<ul>
+  <% current_user.circles.each do |circle| %>
+    <li>
+      <%= circle.name %>
+    </li>
+  <% end %>
+</ul>
+
+<a href="<%= new_friend_circle_url %>">Create a Circle</a>

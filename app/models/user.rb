@@ -8,6 +8,22 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
 
+  has_many(
+    :memberships,
+    class_name: "FriendCircleMembership",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+
+  has_many :circles, through: :memberships, source: :circle
+
+  has_many(
+    :owned_circles,
+    class_name: "FriendCircle",
+    foreign_key: :owner_id,
+    primary_key: :id
+  )
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -34,6 +50,12 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
+  end
+
+  def reset_password_token!
+    self.reset_password_token = SecureRandom::urlsafe_base64(16)
+    self.save!
+    self.reset_password_token
   end
 
 end

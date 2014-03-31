@@ -3,6 +3,7 @@
 
   <label for="user_email">Email:</label>
   <input id="user_email" name="user[email]" value="<%= @user.email %>" type="email">
+  <a href="<%= new_reset_password_url %>">reset password</a>
 
   <label for="user_password">Password:</label>
   <input id="user_password" name="user[password]" type="password">

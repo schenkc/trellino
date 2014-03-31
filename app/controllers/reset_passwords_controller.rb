@@ -6,6 +6,7 @@ class ResetPasswordsController < ApplicationController
 
   def create
     @user = User.find_by(params[:email])
+    @user.reset_password_token!
     send_reset_password_email(@user)
   end
 
@@ -16,9 +17,9 @@ class ResetPasswordsController < ApplicationController
 
   def update
     @user = User.find_by(email: params[:user][:email])
-
     if @user
       @user.update(user_params)
+      @user.reset_password_token!
       sign_in!(@user)
       flash[:errors] = ["Password updated"]
       redirect_to users_url
