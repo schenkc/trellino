@@ -1,10 +1,25 @@
 <h1>Making it go right round</h1>
 
-<form action="<%= friend_circles_url %>" value="post">
+<form action="<%= friend_circles_url %>" method="post">
   <%= auth_token %>
 
   <label for="friend_circle_name">Name:</label>
   <input
-    >
+    id="friend_circle_name"
+    name="friend_circle[name]"
+    type="text">
+  <br>
+  <ul>
+    <% User.all.each do |user| %>
+      <input
+        id="user_id"
+        name="user[id][]"
+        type="checkbox"
+        value="<%= user.id %>">
+      <label for="user_id"><%= user.email %></label>
+      <br>
+    <% end %>
+  </ul>
 
+  <input type="submit" value="Make Cirlce Go Right Round">
 </form>

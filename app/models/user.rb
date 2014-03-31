@@ -12,16 +12,18 @@ class User < ActiveRecord::Base
     :memberships,
     class_name: "FriendCircleMembership",
     foreign_key: :user_id,
-    primary_key: :id
+    primary_key: :id,
+    inverse_of: :user
   )
 
-  has_many :circles, through: :memberships, source: :circle
+  has_many :circles, through: :memberships, source: :circle, inverse_of: :members
 
   has_many(
     :owned_circles,
     class_name: "FriendCircle",
     foreign_key: :owner_id,
-    primary_key: :id
+    primary_key: :id,
+    inverse_of: :owner
   )
 
   def password=(password)

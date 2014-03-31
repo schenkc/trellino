@@ -1,5 +1,5 @@
 SocialThingamajig::Application.routes.draw do
-  resources :users, only: [:new, :create, :index] do
+  resources :users, only: [:new, :create, :show] do
     resources :friend_circles, only: [:show]
   end
 

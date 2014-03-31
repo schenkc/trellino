@@ -6,9 +6,18 @@ class FriendCircle < ActiveRecord::Base
     :memberships,
     class_name: "FriendCircleMembership",
     foreign_key: :circle_id,
-    primary_key: :id
+    primary_key: :id,
+    inverse_of: :circle
   )
 
-  has_many :members, through: :memberships, source: :users
+  belongs_to(
+    :owner,
+    class_name: "User",
+    foreign_key: :owner_id,
+    primary_key: :id,
+    inverse_of: :owned_circles
+  )
+
+  has_many :members, through: :memberships, source: :user, inverse_of: :circles
 
 end

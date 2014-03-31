@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
     if @user
       sign_in!(@user)
-      redirect_to users_url
+      redirect_to user_url(@user)
     else
       flash.now[:errors] = ["Learn to type! Otra vez!"]
       render :new
