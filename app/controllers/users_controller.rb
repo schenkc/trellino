@@ -21,15 +21,6 @@ class UsersController < ApplicationController
   def index
   end
 
-  def reset_password
-    @user = User.find_by(session_token: params[:token]) # :token is from db
-    if params[:token] && @user
-      redirect_to new_password_url
-    else
-      raise ActiveRecord::RecordNotFound.new()
-    end
-  end
-
   private
 
   def user_params

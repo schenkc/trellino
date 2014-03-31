@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry-rails'
 gem 'bcrypt-ruby', require: 'bcrypt'
-gem 'letter_opener'
+gem 'letter_opener', :group => :development
 
 group :development do
   gem 'better_errors'
