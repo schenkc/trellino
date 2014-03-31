@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_signed_in
-  before_action :require_signed_out
+  before_action :require_signed_in, only: [:index]
+  before_action :require_signed_out, only: [:new, :create]
 
   def new
     @user = User.new
@@ -19,6 +19,15 @@ class UsersController < ApplicationController
   end
 
   def index
+  end
+
+  def reset_password
+    @user = User.find_by(session_token: params[:token]) # :token is from db
+    if params[:token] && @user
+      redirect_to new_password_url
+    else
+      raise ActiveRecord::RecordNotFound.new()
+    end
   end
 
   private

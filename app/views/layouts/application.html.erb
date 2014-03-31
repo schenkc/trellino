@@ -2,13 +2,29 @@
 <html>
 <head>
   <title>SocialThingamajig</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%#= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%#= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if signed_in? %>
+    <%= render "shared/logout" %>
+  <% else %>
+    <a href="<%= new_user_url %>">Sign Up</a>
+    <a href="<%= new_session_url %>">Sign In</a>
+  <% end %>
 
-<%= yield %>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |error| %>
+      <ul>
+        <li>
+          <%= error %>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <%= yield %>
 
 </body>
 </html>
