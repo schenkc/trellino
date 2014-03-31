@@ -26,6 +26,14 @@ class User < ActiveRecord::Base
     inverse_of: :owner
   )
 
+  has_many(
+    :posts,
+    class_name: "Post"
+    foreign_key: :user_id,
+    primary_key: :id,
+    inverse_of: :user
+  )
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
