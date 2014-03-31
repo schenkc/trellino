@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   has_many(
     :posts,
-    class_name: "Post"
+    class_name: "Post",
     foreign_key: :user_id,
     primary_key: :id,
     inverse_of: :user

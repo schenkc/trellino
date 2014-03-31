@@ -1,0 +1,34 @@
+<h1>Make a post</h1>
+
+<form action="<%= posts_url %>" method="post">
+  <%= auth_token %>
+
+  <label for="post_body">Name:</label>
+  <input
+    id="post_body"
+    name="post[body]"
+    type="text">
+  <br>
+
+  <% 3.times do |idx| %>
+    <ul>
+        <label for="link_<%= idx %>">Link <%= idx %></label>
+        <input id="link_<%= idx %>" type="text" name="link[<%= idx %>][body]">
+        <br>
+    </ul>
+  <% end %>
+
+  <ul>
+    <% FriendCircle.all.each do |circle| %>
+      <input
+        id="circle_id"
+        name="circle[id][]"
+        type="checkbox"
+        value="<%= circle.id %>">
+      <label for="circle_id"><%= circle.name %></label>
+      <br>
+    <% end %>
+  </ul>
+
+  <input type="submit" value="Post">
+</form>

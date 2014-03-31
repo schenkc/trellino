@@ -9,5 +9,7 @@ SocialThingamajig::Application.routes.draw do
 
   resource :reset_password, only: [:new, :create, :edit, :update]
 
+  resources :posts, only: [:new, :create]
+
   root to: 'users#show'
 end
