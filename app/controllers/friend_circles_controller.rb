@@ -1,7 +1,7 @@
 class FriendCirclesController < ApplicationController
 
   def new
-    @user = current_user
+    @circle = FriendCircle.new
     render :new
   end
 
@@ -20,16 +20,37 @@ class FriendCirclesController < ApplicationController
   end
 
   def index
+    @circles = current_user.owned_circles
   end
+
+  def show
+    @circle = current_user.owned_circles.find(params[:id])
+  end
+
+  def edit
+    @circle = current_user.owned_circles.find(params[:id])
+  end
+
+  def update
+    @circle = current_user.owned_circles.find(params[:id])
+    if @circle.update_attributes(circle_params)
+      redirect_to @circle
+    else
+      flash.now[:errors] = @circle.errors.full_messages
+      render :edit
+    end
+  end
+
+
 
   private
 
   def circle_params
-    params.require(:friend_circle).permit(:name)
+    params.require(:friend_circle).permit(:name, :owner_id, member_ids: [])
   end
 
   def member_id_params
-    params[:user][:id]
+    params[:friend_circle][:member_ids]
   end
 
 end

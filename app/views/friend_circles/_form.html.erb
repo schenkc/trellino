@@ -1,0 +1,31 @@
+<% action_url = circle.persisted? ? friend_circle_url(circle) : friend_circles_url %>
+
+<form action="<%= action_url %>" method="post">
+  <% if circle.persisted? %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <%= auth_token %>
+
+  <label for="friend_circle_name">Name:</label>
+  <input
+    id="friend_circle_name"
+    name="friend_circle[name]"
+    type="text">
+  <br>
+
+  <ul>
+    <input type="hidden" name="friend_circle[member_ids][]">
+    <% User.all.each do |user| %>
+      <input
+        name="friend_circle[member_ids][]"
+        type="checkbox"
+        value="<%= user.id %>"
+        <%= 'checked' if circle.member_ids.include?(user.id) %>>
+      <label for="user_id"><%= user.email %></label>
+      <br>
+    <% end %>
+  </ul>
+
+  <input type="submit" value="Make Cirlce Go Right Round. Create Friend Circle.">
+</form>

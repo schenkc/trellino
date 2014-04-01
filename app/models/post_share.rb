@@ -1,7 +1,7 @@
 class PostShare < ActiveRecord::Base
 
   belongs_to(
-    :cirlce,
+    :circle,
     class_name: "FriendCircle",
     foreign_key: :circle_id,
     primary_key: :id,

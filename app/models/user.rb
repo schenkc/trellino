@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   )
 
   has_many :circles, through: :memberships, source: :circle, inverse_of: :members
+  has_many :friend_posts, through: :circles, source: :posts
 
   has_many(
     :owned_circles,

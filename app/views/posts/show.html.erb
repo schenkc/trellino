@@ -1,0 +1,18 @@
+<p><%= @post.body %></p>
+
+<h3>Circles</h3>
+<ul>
+  <% @post.circles.each do |circle| %>
+    <li><%= link_to circle.name, circle %></li>
+  <% end %>
+</ul>
+
+<h3>Links</h3>
+<ul>
+  <% @post.links.each do |link| %>
+    <li><%= link_to link.url %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Edit Post", edit_post_url(@post) %>
+

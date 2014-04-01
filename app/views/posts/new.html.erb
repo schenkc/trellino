@@ -3,21 +3,14 @@
 <form action="<%= posts_url %>" method="post">
   <%= auth_token %>
 
-  <label for="post_body">Name:</label>
+  <label for="post_body">Body:</label>
   <input
     id="post_body"
     name="post[body]"
     type="text">
   <br>
 
-  <% 3.times do |idx| %>
-    <ul>
-        <label for="link_<%= idx %>">Link <%= idx %></label>
-        <input id="link_<%= idx %>" type="text" name="link[<%= idx %>][body]">
-        <br>
-    </ul>
-  <% end %>
-
+  <h3>Circles</h3>
   <ul>
     <% FriendCircle.all.each do |circle| %>
       <input
@@ -29,6 +22,17 @@
       <br>
     <% end %>
   </ul>
+  <br>
+
+  <h3>Links</h3>
+  <% 3.times do |idx| %>
+    <ul>
+        <label for="link_<%= idx %>">Link <%= idx %></label>
+        <input id="link_<%= idx %>" type="text" name="link[<%= idx %>][url]">
+        <br>
+    </ul>
+  <% end %>
+  <br>
 
   <input type="submit" value="Post">
 </form>
